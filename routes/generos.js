@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const controller = require('../controllers/generos');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('generos', { generos: 'generos' });
-});
+router.get('/', controller.getGeneros);
 
 module.exports = router;

@@ -8,12 +8,24 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER
         },
 
-        categoria:{
+        titulo: {
             allowNull: false,
             type: dataTypes.STRING(45)
         },
 
         duracion: {
+            type: dataTypes.INTEGER
+        },
+
+        genero_id: {
+            type: dataTypes.INTEGER
+        },
+
+        album_id: {
+            type: dataTypes.INTEGER
+        },
+        
+        artista_id: {
             type: dataTypes.INTEGER
         },
     }
@@ -25,19 +37,19 @@ module.exports = (sequelize, dataTypes) => {
     
     const Canciones = sequelize.define(alias, cols, config);
 
-    Canciones.asociate = function (models) {
+    Canciones.associate = function (models) {
         Canciones.belongsTo(models.Albumes, {
-            as: "albumes",
+            as: "album",
             foreignKey: "album_id",
             });
         
         Canciones.belongsTo(models.Generos, {
-            as: "generos",
+            as: "genero",
             foreignKey: "genero_id"
         }) 
         
         Canciones.belongsTo(models.Artistas, {
-            as: "artistas",
+            as: "artista",
             foreignKey: "artista_id"
         }) 
     }

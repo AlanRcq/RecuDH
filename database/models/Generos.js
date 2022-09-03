@@ -8,7 +8,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER
         },
 
-        nombre: {
+        name: {
             allowNull: false,
             type: dataTypes.STRING(45)
         },
@@ -21,10 +21,10 @@ module.exports = (sequelize, dataTypes) => {
     
     const Generos = sequelize.define(alias, cols, config);
 
-    Generos.asociate = function (models) {
+    Generos.associate = function (models) {
         Generos.hasMany(models.Canciones, {
-            as: "generos",
-            foreignKey: "album_id",
+            as: "canciones",
+            foreignKey: "genero_id",
             });
     }
 
