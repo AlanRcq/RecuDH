@@ -1,4 +1,5 @@
 const db = require("../database/models");
+const { sendConnectionError } = require('../helpers/errorHelper');
 
 const controller = {
     
@@ -17,7 +18,7 @@ const controller = {
 
                 newGeneros.push({
                     id: genero.id,
-                    nombre: genero.nombre,
+                    nombre: genero.name,
                     canciones: canciones
                 })
             })
@@ -27,14 +28,10 @@ const controller = {
                 generos: newGeneros,
             }
 
-            res.json(returnObject);
+            res.status(200).json(returnObject);
 
         }).catch( (err) => {
-            console.error(err);
-            res.json({
-                status: 407,
-                mensaje: "Connection to database error"
-            })
+            sendConnectionError(res, err);
         })
     }
 
